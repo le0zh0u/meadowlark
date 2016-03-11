@@ -1,5 +1,5 @@
 var express = require('express');
-var fortune = require("./lib/fortune/js");
+var fortune = require("./lib/fortune.js");
 var app = express();
 
 //设置handlebars 视图引擎
@@ -8,6 +8,11 @@ app.engine('handlebars',handlebars.engine);
 app.set('view engine', 'handlebars');
 
 app.set('port',process.env.PORT || 3000);
+
+app.use(function(req, res, next){
+	res.locals.showTests = app.get('env') !== 'production' && req.query.test == '1';
+	next();
+});
 
 app.use(express.static(__dirname + '/public'));
 
