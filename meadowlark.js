@@ -38,7 +38,7 @@ app.get('/tours/request-group-rate',function(req, res){
 app.use(function(req, res, next){
 	res.status(404);
     res.render('404');
-})
+});
 
 //定制500页面
 app.use(function(err, req, res, next){
@@ -49,4 +49,4 @@ app.use(function(err, req, res, next){
 
 app.listen(app.get('port'),function(){
 	console.log('Express started on http://localhost:' + app.get('port') + '; press Ctrl - C to rerminate.');
-})
+});
