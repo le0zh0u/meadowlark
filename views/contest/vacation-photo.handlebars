@@ -1,3 +1,25 @@
+
+<style type="text/css">
+	.btn-file{
+		position: relative;
+		overflow: hidden;
+	}
+	.btn-file input[type=file]{
+		position: absolute;
+		top: 0;
+		right: 0;
+		min-width: 100%;
+		min-height: 100%;
+		font-size: 999px;
+		text-align: right;
+		filter: alpha(opacity=0);
+		opacity: 0;
+		outline: none;
+		background: white;
+		cursor: inherit;
+		display: block;
+	}
+</style>
 <form class="form-horizontal" role="form" enctype="multipart/form-data"
 method="POST" action="/contest/vacation-photo/{year}/{month}">
 	<div class="form-group">
@@ -15,8 +37,12 @@ method="POST" action="/contest/vacation-photo/{year}/{month}">
 	<div class="form-group">
 		<label class="col-md-2 control-label" for="fieldPhoto">Vacation photo</label>
 		<div class="col-md-4">
-			<input type="file" class="form-control" required 
-			accept="image/*" id="fieldPhoto" name="photo">
+			<span class="btn btn-default btn-file">
+				Upload
+				<input type="file" class="form-control" required 
+			accept="image/*" id="fieldPhoto" data-url="/upload" name="photo">
+			</span>
+			<div id="uploads"></div>
 		</div>
 	</div>
 	<div class="form-group">
@@ -25,3 +51,17 @@ method="POST" action="/contest/vacation-photo/{year}/{month}">
 		</div>
 	</div>
 </form>
+
+<script src="/vendor/jqfu/js/vendor/jquery.ui.widget.js"/>
+<script src="/vendor/jqfu/js/jquery.iframe-transport.js"/>
+<script src="/vendor/jqfu/js/jquery.fileupload.js"/>
+<script type="text/javascript">
+	$(document).ready(function(){
+$('#fieldPhoto').fileupload({ dataType: 'json',
+done: function(e, data){
+$.each(data.result.files, function(index, file){ $('#fileUploads').append($('<div class="upload">' +
+ 
+}); }
+}); });
+
+</script>
