@@ -1,5 +1,6 @@
 var express = require('express');
 var fortune = require("./lib/fortune.js");
+var credentials = require('./credentials.js');
 var app = express();
 
 //设置handlebars 视图引擎
@@ -15,6 +16,9 @@ app.use(function(req, res, next){
 });
 
 app.use(express.static(__dirname + '/public'));
+
+app.use(require('cookie-parser')(credentials.cookieSecret));
+app.use(require('express-session')());
 
 app.get('/', function(req, res){
 	res.render('home');
